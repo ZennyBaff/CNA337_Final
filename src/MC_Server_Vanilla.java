@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 import org.jsoup.select.Evaluator.ContainsText;
 
@@ -27,6 +30,7 @@ public class MC_Server_Vanilla extends MC_Server {
     String Link = "o";
     String y = "o";
     String x = "o";
+    String t = "o";
     Document doc;
 
 
@@ -37,21 +41,61 @@ public class MC_Server_Vanilla extends MC_Server {
       //System.out.println(y);
       if (y.contains("https://launcher.mojang.com/v1/objects/")) {
         Link = (y);
-        //System.out.println(Link);
+        System.out.println(Link);
       } else {
         continue;
       }
     }
-    doc = Jsoup.connect("https://minecraft.net/en-us/download/server/").get();
-    System.out.print(doc);
 
-      URL website = new URL(Link);
-      ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-      FileOutputStream fos = new FileOutputStream("Server.jar");
-      fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+
+    for (Element Ver_link : links) {
+      t = Ver_link.attr("href");
+      //System.out.println(y);
+      String Ver_Node = Ver_link.childNode(0).toString();
+      if (t.contains("https://launcher.mojang.com/v1/objects")) {
+        System.out.println(Ver_Node);
+      } else {
+        continue;
+      }
+
+      System.out.println("Working Directory = " +
+              System.getProperty("user.dir"));
+
+      String filePathString = System.getProperty("user.dir");
+      String ServerPath = (filePathString + "/" + Ver_Node);
+      String Mods_FolderPath = (filePathString + "/mods");
+
+      File f = new File(ServerPath);
+
+      if (f.exists()) {
+        System.out.println("Server is already up to date!");
+      } else {
+        System.out.println("Updating Server!");
+
+        System.out.println("Downloading: " + Ver_Node);
+        URL website = new URL(Link);
+        ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+        FileOutputStream fos = new FileOutputStream(Ver_Node);
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        System.out.println("Download for"+ Ver_Node + "has completed");
+
+        System.out.println("Creating: eula.txt");
+        PrintWriter Eula_Writer = new PrintWriter("eula.txt", "UTF-8");
+        Eula_Writer.println("eula=true");
+        Eula_Writer.close();
+        System.out.println("Created: eula.txt");
+
+
+        System.out.println("Creating: Start" + Ver_Node + ".txt...");
+        PrintWriter Start_Writer = new PrintWriter("Start -" + Ver_Node +"-.bat", "UTF-8");
+        Start_Writer.println("java -Xmx1024M -Xms1024M -jar " + Ver_Node + " nogui");
+        Start_Writer.close();
+        System.out.println("Start -" + Ver_Node +"-.bat Created");
+
+      }
     }
-
   }
+}
 
 
 
