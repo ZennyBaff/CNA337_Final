@@ -1,4 +1,4 @@
-public class MC_Server {
+public class MC_Server extends Main{
   public String IP;
   public String URL;
   public String File_Location;

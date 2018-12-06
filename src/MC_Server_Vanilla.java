@@ -1,26 +1,14 @@
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
-import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import org.jsoup.select.Evaluator.ContainsText;
-
-
-
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 
 public class MC_Server_Vanilla extends MC_Server {
@@ -92,6 +80,7 @@ public class MC_Server_Vanilla extends MC_Server {
         Start_Writer.close();
         System.out.println("Start -" + Ver_Node +"-.bat Created");
 
+
       }
     }
   }
@@ -100,9 +89,7 @@ public class MC_Server_Vanilla extends MC_Server {
 
 
 
-
-
-
+//BUNCH OF JUNK
  /* String html = "<html><head><title>Sample Title</title></head>"
           + "<body>"
           + "<p>Sample Content</p>"
@@ -128,10 +115,6 @@ public class MC_Server_Vanilla extends MC_Server {
 //      }
 
 
-
-
-
-
 /*
     MC_Server V = new MC_Server();
     V.URL = "https://minecraft.net/en-us/download/server/";
@@ -153,13 +136,6 @@ public class MC_Server_Vanilla extends MC_Server {
       //int http = y.indexOf("https://");
       //System.out.println(http);
  */
-
-
-
-
-
-
-
 
 
 

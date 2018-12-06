@@ -3,23 +3,24 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.zip.*;
 
 
 
 public class MC_Server_Modded extends MC_Server {
-  public static void main(String Ver_Num) throws IOException {
-    Unzip Unzip_class = new Unzip();
-    Unzip_class.main(Ver_Num);
+  public static void main() throws Exception {
 
-    String Ver_Name = "1.7.10_Server" + Ver_Num;
+
+/*  Object destDirectory = "o";
+    String zipFilePath = "o";
+    String Ver_Num = "o";
+    Main main = new Main();
+*/
+    String Ver_Num = "o";
     String Link = "o";
     String y = "o";
     String x = "o";
@@ -27,13 +28,6 @@ public class MC_Server_Modded extends MC_Server {
     Document doc;
 
 
-
-    System.out.println("Working Directory = " +
-            System.getProperty("user.dir"));
-    String filePathString = System.getProperty("user.dir");
-    String ServerPath = (filePathString + "/");
-    String Mods_FolderPath = (filePathString + "/mods");
-    String Zip_FolderPath = (filePathString + "/mods");
 
 
 
@@ -43,34 +37,62 @@ public class MC_Server_Modded extends MC_Server {
       y = (link.attr("href"));
       if (y.contains("http://solder.endermedia.com/repository/downloads/the-1710-pack/the-1710-pack")) {
         Link = (y);
-        break; }
+        break;
+      }
     }
-
-
     for (Element Ver_link : links) {
       t = Ver_link.attr("href");
       if (t.contains("http://solder.endermedia.com/repository/downloads/the-1710-pack/the-1710-pack")) {
         String Ver_Node = Ver_link.childNode(1).childNode(0).toString();
         Ver_Num = Ver_Node;
-        Main Send_Ver = new Main();
         break;
       }
-
     }
+    System.out.println("Checking Working Directory: " + System.getProperty("user.dir"));
+    String filePathString = System.getProperty("user.dir");
+    String ServerPath = (filePathString + "/" + "the-1710-pack_"+ Ver_Num +".zip");
+    String Mods_FolderPath = (filePathString + "/mods");
 
 
+
+    String path= Mods_FolderPath;
+    File file = new File(path);
+    if (!file.exists()) {
+      System.out.println("\nThis is a Vanilla Server. Switching to Vanilla Automatic Server Updater.");
+    }else{
+      System.out.print("Sorry! Automatic Modded Server updating is not an option!");
+      System.out.print("\nChecking Server Version...");
+      String filePath = (ServerPath);
+      File f = new File(filePath);
+      if (f.exists()) {
+        System.out.print("\nModded Server is already up to date! Closing Program.");
+        System.exit(10);
+      } else {
+        System.out.println("\nPrepping for download");
+
+        System.out.println("\nDownloading: " + Ver_Num);
+        java.net.URL website = new URL(Link);
+        ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+        FileOutputStream fos = new FileOutputStream("the-1710-pack_"+ Ver_Num +".zip");
+        fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+        System.out.println("\nDownload for :" + "the-1710-pack_"+ Ver_Num +".zip" + " has completed, Now get configuring!");
+        System.exit(10);
+    }
+    }
+    }
   }
-}
 
 
 
+//BUNCH OF JUNK
+    /*
+    //Main Main_Server_Modded = new Main();
+    //Main_Server_Modded.main3(Ver_Num);
+    //main.main3(Ver_Num);
+    //unzip.main();
 
 
-
-
-
-
-
+    */
 
 /*
     File f = new File(ServerPath);
@@ -108,22 +130,6 @@ public class MC_Server_Modded extends MC_Server {
       } catch (ZipException e) {
         e.printStackTrace();
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -167,20 +173,6 @@ String finalVer_Num = Ver_Num;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     List<String> srcFiles = Arrays.asList(f.list());
     FileOutputStream fos = new FileOutputStream("the-1710-pack_0.9.8.zip");
     System.out.print(srcFiles);
@@ -200,12 +192,6 @@ String finalVer_Num = Ver_Num;
     }
     zipOut.close();
     fos.close();
-
-
-
-
-
-
 
 
 

@@ -10,57 +10,38 @@
 //https://stackoverflow.com/questions/7301764/how-to-get-contents-of-a-folder-and-put-into-an-arraylist
 //https://www.youtube.com/watch?v=CSifkubnE-E
 //https://www.youtube.com/watch?v=7MBgaF8wXls
-
-
-import java.io.BufferedReader;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Stream;
+//https://www.codeproject.com/Questions/649669/need-to-unzip-all-zip-format-in-the-folder
+//https://stackoverflow.com/questions/15571496/how-to-check-if-a-folder-exists
+//https://stackoverflow.com/questions/5086093/passing-variables-between-classes-in-java
+//https://stackoverflow.com/questions/22452930/terminating-a-java-program
 
 public class Main {
 
-    public static void main(String Ver_Num) throws IOException {
+  public static void main(String[] args) throws Exception {
 
-//----------------MC_Server_Vanilla.java---------------------------------
+    //----------------MC_Server_Modded.java---------------------------------
+    MC_Server_Modded Main_Modded = new MC_Server_Modded();
+    Main_Modded.main();
 
+    //----------------MC_Server_Vanilla.java---------------------------------
     MC_Server_Vanilla Vanilla = new MC_Server_Vanilla();
+    Vanilla.main();
 
-    //Vanilla.main();
+  }
+}
 
-
-//----------------MC_Server_Modded.java---------------------------------
-
-        MC_Server_Modded Modded = new MC_Server_Modded.();
-        Unzip unzip = new Unzip();
-
-        Modded.main(Ver_Num);
-        unzip.main(Ver_Num);
+/*
 
 
 
+//BUNCH OF JUNK
         /*System.out.println("Hello World!");
         URL website = new URL("https://launcher.mojang.com/v1/objects/3737db93722a9e39eeada7c27e7aca28b144ffa7/server.jar");
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream("information.jar");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
 */
-
-        }
-
-
         // close our reader
-
 /*
         String str = line;
         String findStr = "hello";
@@ -78,4 +59,3 @@ public class Main {
         }
         System.out.println(count);
 */
-        }
