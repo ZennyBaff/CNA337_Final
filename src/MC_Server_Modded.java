@@ -2,7 +2,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.URL;
@@ -15,11 +14,7 @@ public class MC_Server_Modded extends MC_Server {
   public static void main() throws Exception {
 
 
-/*  Object destDirectory = "o";
-    String zipFilePath = "o";
-    String Ver_Num = "o";
-    Main main = new Main();
-*/
+    //Variables for Modded Server update
     String Ver_Num = "o";
     String Link = "o";
     String y = "o";
@@ -28,9 +23,7 @@ public class MC_Server_Modded extends MC_Server {
     Document doc;
 
 
-
-
-
+    //USING JSOUP = Connects to Minecraft server download URL, and Stores the latest download link in (Link)
     doc = Jsoup.connect("http://the-1710-pack.com/repo").get();
     Elements links = doc.select("a[href]");
     for (Element link : links) {
@@ -40,6 +33,9 @@ public class MC_Server_Modded extends MC_Server {
         break;
       }
     }
+
+
+    //USING JSOUP = using the same method for finding the download link, this finds the specific file/version number (ex: 1.1.1)
     for (Element Ver_link : links) {
       t = Ver_link.attr("href");
       if (t.contains("http://solder.endermedia.com/repository/downloads/the-1710-pack/the-1710-pack")) {
@@ -48,26 +44,47 @@ public class MC_Server_Modded extends MC_Server {
         break;
       }
     }
+
+
+    //Finds current directory
     System.out.println("Checking Working Directory: " + System.getProperty("user.dir"));
+
+
+    //Finds variable for Modded Server - zipped folder location
     String filePathString = System.getProperty("user.dir");
     String ServerPath = (filePathString + "/" + "the-1710-pack_"+ Ver_Num +".zip");
+
+
+    //Finds variable for mod folder location
     String Mods_FolderPath = (filePathString + "/mods");
 
 
-
+    //Checks for mod folder to determine if server is modded or vanilla
     String path= Mods_FolderPath;
     File file = new File(path);
     if (!file.exists()) {
+
+
+      //NO MODS FOLDER FOUND, skips rest of modded and goes back to main to start vanilla
       System.out.println("\nThis is a Vanilla Server. Switching to Vanilla Automatic Server Updater.");
     }else{
+
+
+      //Checks Server version
       System.out.print("Sorry! Automatic Modded Server updating is not an option!");
       System.out.print("\nChecking Server Version...");
       String filePath = (ServerPath);
       File f = new File(filePath);
       if (f.exists()) {
+
+
+        //Server version is up to date, closes program
         System.out.print("\nModded Server is already up to date! Closing Program.");
         System.exit(10);
       } else {
+
+
+        //Server version is older, starts to download new .zip folder with all content for new server
         System.out.println("\nPrepping for download");
 
         System.out.println("\nDownloading: " + Ver_Num);
@@ -76,6 +93,9 @@ public class MC_Server_Modded extends MC_Server {
         FileOutputStream fos = new FileOutputStream("the-1710-pack_"+ Ver_Num +".zip");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
         System.out.println("\nDownload for :" + "the-1710-pack_"+ Ver_Num +".zip" + " has completed, Now get configuring!");
+
+
+        //ends program
         System.exit(10);
     }
     }
@@ -85,6 +105,12 @@ public class MC_Server_Modded extends MC_Server {
 
 
 //BUNCH OF JUNK
+/*  Object destDirectory = "o";
+    String zipFilePath = "o";
+    String Ver_Num = "o";
+    Main main = new Main();
+*/
+
     /*
     //Main Main_Server_Modded = new Main();
     //Main_Server_Modded.main3(Ver_Num);

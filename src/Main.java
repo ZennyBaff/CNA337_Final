@@ -1,3 +1,7 @@
+//This program checks if the server is modded or vanilla and updates them respectivly
+//CNA 337, Fall 2018
+//Ian Hardgrave ijhardgrave@student.rtc.edu, Wyatt Humphreys wlhumphreys@student.rtc.edu
+
 
 //https://stackoverflow.com/questions/921262/how-to-download-and-save-a-file-from-internet-using-java
 //https://alvinalexander.com/blog/post/java/how-open-read-url-java-url-class-example-code
@@ -16,14 +20,15 @@
 //https://stackoverflow.com/questions/22452930/terminating-a-java-program
 
 public class Main {
-
+//MAIN METHOD
   public static void main(String[] args) throws Exception {
 
-    //----------------MC_Server_Modded.java---------------------------------
+
+    //----------------Executes MC_Server_Modded.java------------------------//
     MC_Server_Modded Main_Modded = new MC_Server_Modded();
     Main_Modded.main();
 
-    //----------------MC_Server_Vanilla.java---------------------------------
+    //----------------Executes MC_Server_Vanilla.java-----------------------//
     MC_Server_Vanilla Vanilla = new MC_Server_Vanilla();
     Vanilla.main();
 
@@ -40,9 +45,9 @@ public class Main {
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream("information.jar");
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-*/
+
         // close our reader
-/*
+
         String str = line;
         String findStr = "hello";
         int lastIndex = 0;
