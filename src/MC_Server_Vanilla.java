@@ -51,21 +51,22 @@ public class MC_Server_Vanilla extends MC_Server {
 
       String filePathString = System.getProperty("user.dir");
       String ServerPath = (filePathString + "/" + Ver_Node);
-      String Mods_FolderPath = (filePathString + "/mods");
 
       File f = new File(ServerPath);
-
+      System.out.print("\nChecking Server Version...");
       if (f.exists()) {
-        System.out.println("Server is already up to date!");
+        System.out.print("\nVanilla Server is already up to date! Closing Program.");
+        System.exit(10);
       } else {
         System.out.println("Updating Server!");
+        System.out.println("\nPrepping for download");
 
         System.out.println("Downloading: " + Ver_Node);
         URL website = new URL(Link);
         ReadableByteChannel rbc = Channels.newChannel(website.openStream());
         FileOutputStream fos = new FileOutputStream(Ver_Node);
         fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-        System.out.println("Download for"+ Ver_Node + "has completed");
+        System.out.println("Download for: "+ Ver_Node + "has completed");
 
         System.out.println("Creating: eula.txt");
         PrintWriter Eula_Writer = new PrintWriter("eula.txt", "UTF-8");
@@ -79,8 +80,9 @@ public class MC_Server_Vanilla extends MC_Server {
         Start_Writer.println("java -Xmx1024M -Xms1024M -jar " + Ver_Node + " nogui");
         Start_Writer.close();
         System.out.println("Start -" + Ver_Node +"-.bat Created");
+        System.out.println("\nYour Vanilla Server is now updated! :)");
 
-
+        System.exit(10);
       }
     }
   }
